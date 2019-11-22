@@ -1,12 +1,12 @@
 import React from 'react'
-import AppBar from '../common/appbar/Appbar'
 import useFiles from '../hooks/useFiles'
+import { Typography } from '@material-ui/core'
 
 function Home() {
     const {data} = useFiles()
     console.log('data', data)
     return(
-        <AppBar />
+        <Typography>Home</Typography>
     )
 }
 

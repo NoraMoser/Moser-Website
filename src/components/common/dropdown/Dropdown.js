@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { MenuItem, Menu } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
+import {withRouter} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
     menu: {
@@ -9,12 +10,13 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const options = [
+    'Home',
     'Videos',
     'Quotes',
     'Pictures'
   ];
 
-function Dropdown({open, anchorEl, close}) {
+function Dropdown({open, anchorEl, close, history}) {
     const classes = useStyles()
     const [selectedIndex, setSelectedIndex] = useState(0)
 
@@ -22,15 +24,18 @@ function Dropdown({open, anchorEl, close}) {
         return (
             <MenuItem
               key={key}
+              value={key}
               selected={key === selectedIndex}
-              onClick={event => onClick(event, key)}>
+              onClick={event => onClick(event, key, item)}
+              >
                   {item}
               </MenuItem>
         )
     }
 
-    const onClick = (event, index) => {
+    const onClick = (event, index, item) => {
         setSelectedIndex(index)
+        history.push(`/${item}`)
         close()
     }
     return (
@@ -40,4 +45,4 @@ function Dropdown({open, anchorEl, close}) {
     )
 }
 
-export default Dropdown
+export default withRouter(Dropdown)
