@@ -47,7 +47,10 @@ function Uploader({ allowedFileTypes, maxFileSize, label, onChange, multifile })
       const error = handleFileValidationErrors(file)
       if (!error) {
         // Read file and upload
+        console.log('no error')
         const reader = new FileReader()
+        console.log(reader)
+        
         reader.addEventListener('load', () => handleUpload(file, reader.result))
         reader.readAsDataURL(file)
       } else {
@@ -58,6 +61,7 @@ function Uploader({ allowedFileTypes, maxFileSize, label, onChange, multifile })
   }
 
   function handleUpload(file, fileBase64) {
+      console.log('hi')
     // Create form data to submit to services
     const formData = new FormData()
     formData.append('image_id', file)
@@ -84,6 +88,7 @@ function Uploader({ allowedFileTypes, maxFileSize, label, onChange, multifile })
       .catch(error => {
         setErrors(errors => {
           errors.push(error)
+          console.log(error)
           return [...errors]
         })
       })

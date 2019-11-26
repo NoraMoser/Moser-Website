@@ -3,21 +3,33 @@ import { Dialog, TextField, DialogContent, DialogActions, Button, Grid, DialogTi
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
 import DateFunctions from '@date-io/moment'
 import Uploader from './Uploader'
-import useFiles from '../../hooks/useFiles'
 
-function UploadDialog({open, close, isVideo, allowedFileTypes, maxFileSize, label, onChange, fileID}) {
+function UploadDialog({open, close, isVideo, allowedFileTypes, maxFileSize, label, onChange, fileID, createMedia, setFileId}) {
     const [initialFileDate, setInitialFileDate] = useState(null)
     const [endFileDate, setEndFileDate] = useState(null)
     const [fileTitle, setFileTitle] = useState('')
     const [formData, setFormData] = useState()
     console.log(formData)
-    const {uploadFiles, createPictures} = useFiles() 
+    // const {createMedia} = useFiles() 
     const year = initialFileDate ? new Date(initialFileDate).getFullYear() : null
+    const createButtonDisabled = !fileID
     console.log(year)
+    console.log('file id', fileID)
     const object = {
-        year,
-        date_begin: initialFileDate,
-        date_end: endFileDate
+        title: fileTitle,
+        date_created: initialFileDate,
+        date_ended: endFileDate ? endFileDate : null,
+        year: year,
+        media_id: fileID
+    }
+
+    function onClickCreate() {
+        createMedia(object)
+        setInitialFileDate(null)
+        setEndFileDate(null)
+        setFileTitle('')
+        setFileId('')
+        close()
     }
 
     return (
@@ -42,7 +54,7 @@ function UploadDialog({open, close, isVideo, allowedFileTypes, maxFileSize, labe
                 </Grid>
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => createPictures(fileTitle, initialFileDate, fileID)}>Create</Button>
+                <Button disabled={createButtonDisabled} onClick={onClickCreate}>Create</Button>
                 <Button onClick={close}>Cancel</Button>
             </DialogActions>
         </Dialog>

@@ -1,14 +1,20 @@
-import { apiHero, apiUploadFiles, apiCreatePictureObject } from "../../utils/api"
+import { apiHero, apiUploadFiles, apiCreatePictureObject, apiGetAllPictures, apiCreateVideoObject, apiGetAllVideos } from "../../utils/api"
 import { useState, useEffect, useCallback } from "react"
 
 export default function useFiles() {
-    const [data, setData] = useState()
+    const [pictureData, setPictureData] = useState()
+    const [videoData, setVideoData] = useState()
     const [error, setError] = useState()
 
-    const listHeros = useCallback(
+    const listPictures = useCallback(
         () => {
-       apiHero().then(({data}) => setData(data)).catch(e => setError(e))
-    }, [setError, setData])
+       apiGetAllPictures().then(({data}) => setPictureData(data)).catch(e => setError(e))
+    }, [setError, setPictureData])
+
+    const listVideos = useCallback(
+        () => {
+       apiGetAllVideos().then(({data}) => setVideoData(data)).catch(e => setError(e))
+    }, [setError, setVideoData])
 
     const uploadFiles = ({formData}) => {
         apiUploadFiles(formData)
@@ -17,24 +23,34 @@ export default function useFiles() {
             return data.id
           })
           .catch(error => {
+              console.log(error)
             setError(error)
           })
     }
 
-    const createPictures = (title, date, id) => {
-        apiCreatePictureObject(title, date, id)
+    const createPictures = (pictureObject) => {
+        apiCreatePictureObject(pictureObject)
+        .then(({data}) => data)
+        .catch(error => setError(error))
+    }
+
+    const createVideos = (videoObject) => {
+        apiCreateVideoObject(videoObject)
         .then(({data}) => data)
         .catch(error => setError(error))
     }
 
     useEffect(() => {
-        listHeros()
-    }, [listHeros])
+        listPictures()
+        listVideos()
+    }, [listPictures, listVideos])
 
     return {
-        data,
+        pictureData,
         error,
         uploadFiles,
-        createPictures
+        createPictures,
+        createVideos,
+        videoData
       }
 }
