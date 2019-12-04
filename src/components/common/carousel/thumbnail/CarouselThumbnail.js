@@ -28,7 +28,7 @@ function CarouselThumbnail({ fileId, fileIndex, onClick, classes }) {
       <Tooltip title={`File ${fileIndex + 1}`} placement="top">
         <div onClick={onClick} className={classes.thumbnailButton} style={{ marginLeft: fileIndex * 158 }} />
       </Tooltip>
-      <img src={url || ''} className={classes.fileThumbnail} aria-label="CarouselThumbnail" />
+      <img alt="Thumbnail" src={url || ''} className={classes.fileThumbnail} aria-label="CarouselThumbnail" />
     </Fragment>
   )
 }

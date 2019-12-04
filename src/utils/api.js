@@ -29,3 +29,11 @@ export const apiCreateVideoObject = async (object) => {
 export const apiGetAllVideos = async () => {
     return axios.get(`${local}/api/video/list`)
 }
+
+export const apiCreateQuotes = async (object) => {
+    return axios.post(`${local}/api/quote/create`, object)
+}
+
+export const apiGetQuotes = async () => {
+    return axios.get(`${local}/api/quote/list`)
+}

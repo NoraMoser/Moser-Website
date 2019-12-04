@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import { Typography, Box, Grid, Button } from '@material-ui/core'
+import { Typography, Grid, Button } from '@material-ui/core'
 import UploadDialog from '../common/upload/UploadDialog'
 import { ACCEPTED_FILE_TYPES, MAX_FILE_SIZE } from './constants'
 import { makeStyles } from '@material-ui/styles'
@@ -21,9 +21,6 @@ function Pictures() {
     const {createPictures, pictureData} = useFiles() 
     const [openCarousel, setOpenCarousel] = useState(false)
     const [currentValue, setCurrentValue] = useState('')
-    console.log(pictureFile)
-    console.log(error)
-    console.log(pictureData)
 
     const filterPictures = pictureData ? pictureData.filter(item => item.year === currentValue) : []
     let fileIds = filterPictures.length ? filterPictures.map(item => item.media_id) : []

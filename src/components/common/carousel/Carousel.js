@@ -87,7 +87,7 @@ function Carousel({ open, onClose, fileIds = [], classes, onDelete}) {
       <CardContent className={classes.fileContainer}>
           <Typography className={classes.title}>Picture taken: {new Date(media.date_created).toLocaleDateString()}</Typography>
           <Box>
-            <img src={url || ''} className={classes.fileDisplay} />
+            <img alt="Moser" src={url || ''} className={classes.fileDisplay} />
           </Box>
       </CardContent>
       <CardContent className={classes.fileThumbnailsContainer}>{thumbnails}</CardContent>

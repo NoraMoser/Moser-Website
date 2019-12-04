@@ -49,7 +49,7 @@ function UploadDialog({open, close, isVideo, allowedFileTypes, maxFileSize, labe
                         <TextField label={`Title of this ${isVideo ? 'video' : 'picture'}`} value={fileTitle} onChange={e => setFileTitle(e.target.value)} required InputLabelProps={{ shrink: true }}/>
                     </Grid>
                     <Grid item xs={12}>
-                        <Uploader maxFileSize={maxFileSize} allowedFileTypes={allowedFileTypes} onChange={onChange} label={label} haveFormData={data => setFormData(data)} />
+                        <Uploader isVideo={isVideo} maxFileSize={maxFileSize} allowedFileTypes={allowedFileTypes} onChange={onChange} label={label} haveFormData={data => setFormData(data)} />
                     </Grid>
                 </Grid>
             </DialogContent>

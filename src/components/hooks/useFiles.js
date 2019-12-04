@@ -1,10 +1,16 @@
-import { apiHero, apiUploadFiles, apiCreatePictureObject, apiGetAllPictures, apiCreateVideoObject, apiGetAllVideos } from "../../utils/api"
+import { apiUploadFiles, apiCreatePictureObject, apiGetAllPictures, apiCreateVideoObject, apiGetAllVideos, apiCreateQuotes, apiGetQuotes } from "../../utils/api"
 import { useState, useEffect, useCallback } from "react"
 
 export default function useFiles() {
     const [pictureData, setPictureData] = useState()
     const [videoData, setVideoData] = useState()
     const [error, setError] = useState()
+    const [quoteData, setQuoteData] = useState()
+
+    const listQuotes = useCallback(
+        () => {
+            apiGetQuotes().then(({data}) => setQuoteData(data)).catch(e => setError(e))
+        }, [setError, setQuoteData])
 
     const listPictures = useCallback(
         () => {
@@ -40,10 +46,17 @@ export default function useFiles() {
         .catch(error => setError(error))
     }
 
+    const createQuotes = (quoteObject) => {
+        apiCreateQuotes(quoteObject)
+        .then(({data}) => data)
+        .catch(error => setError(error))
+    }
+
     useEffect(() => {
+        listQuotes()
         listPictures()
         listVideos()
-    }, [listPictures, listVideos])
+    }, [listPictures, listVideos, listQuotes])
 
     return {
         pictureData,
@@ -51,6 +64,8 @@ export default function useFiles() {
         uploadFiles,
         createPictures,
         createVideos,
-        videoData
+        videoData,
+        createQuotes,
+        quoteData
       }
 }

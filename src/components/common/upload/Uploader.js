@@ -1,11 +1,10 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Button, IconButton, InputLabel, TextField } from '@material-ui/core'
+import { Button, IconButton, InputLabel} from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 import { apiUploadFiles } from '../../../utils/api'
 import { checkMimeType, checkFileSize } from '../../../utils/helpers'
 import { makeStyles } from '@material-ui/styles'
-import { StylesContext } from '@material-ui/styles/StylesProvider'
 
 const ERROR_MIME_TYPE = 'Only %mime_types% %to_be% allowed'
 const ERROR_FILE_SIZE = 'File must be equal to or less than 1mb'
@@ -25,7 +24,7 @@ const styles = makeStyles({
   }
 })
 
-function Uploader({ allowedFileTypes, maxFileSize, label, onChange, multifile }) {
+function Uploader({ isVideo, allowedFileTypes, maxFileSize, label, onChange, multifile }) {
   const [fileIds, setFileIds] = useState([])
   const [thumbnails, setThumbnails] = useState([])
   const [errors, setErrors] = useState([])
@@ -51,7 +50,7 @@ function Uploader({ allowedFileTypes, maxFileSize, label, onChange, multifile })
         const reader = new FileReader()
         console.log(reader)
         
-        reader.addEventListener('load', () => handleUpload(file, reader.result))
+        !isVideo ? reader.addEventListener('load', () => handleUpload(file, reader.result)) : handleUpload(file, reader.result)
         reader.readAsDataURL(file)
       } else {
         errors.push(error)
