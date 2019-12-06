@@ -35,7 +35,8 @@ function Dropdown({open, anchorEl, close, history}) {
 
     const onClick = (event, index, item) => {
         setSelectedIndex(index)
-        history.push(`/${item}`)
+        const option = item === 'Home' ? '' : item
+        history.push(`/${option}`)
         close()
     }
     return (

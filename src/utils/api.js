@@ -37,3 +37,15 @@ export const apiCreateQuotes = async (object) => {
 export const apiGetQuotes = async () => {
     return axios.get(`${local}/api/quote/list`)
 }
+
+export const apiSignUpNewUser = async (object) => {
+    return axios.post(`${local}/api/user/sign-up`, object)
+}
+
+export const apiSendEmail = async (email) => {
+    return axios.post(`${local}/api/user/verification/email/send/${email}`)
+}
+
+export const apiSignIn = async (object) => {
+    return axios.post(`${local}/api/user/sign-in`, object)
+}

@@ -15,7 +15,7 @@ export default function Routes() {
             <Suspense fallback={<Loader />}>
               <Route path="/" component={AppBar} />
                 <Switch>
-                    <Route exact={true} path="/Home" component={Home} />
+                    <Route exact={true} path="/" component={Home} />
                     <Route exact={true} path="/Videos" component={Videos} />
                     <Route exact={true} path="/Quotes" component={Quotes} />
                     <Route exact={true} path="/Pictures" component={Pictures} />
