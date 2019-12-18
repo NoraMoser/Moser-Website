@@ -7,12 +7,10 @@ import { apiGetFileImageUrl } from '../../../../utils/api'
 
 function CarouselThumbnail({ fileId, fileIndex, onClick, classes }) {
     const [url, setUrl] = useState()
-    console.log(url)
 
     const imageUrl = useCallback(
         () => {
             apiGetFileImageUrl(fileId).then(({config}) => {
-                console.log(config.url)
                 setUrl(config.url)
                 return config.url
             })

@@ -22,8 +22,8 @@ const styles = theme => {
       },
       fileDisplay: {
         flex: 1,
-        width: 800, 
-        height: 800,
+        height: '100%',
+        width: 'auto', 
         marginLeft: 300
       },
       fileThumbnailsContainer: {

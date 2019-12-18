@@ -46,9 +46,7 @@ function Uploader({ isVideo, allowedFileTypes, maxFileSize, label, onChange, mul
       const error = handleFileValidationErrors(file)
       if (!error) {
         // Read file and upload
-        console.log('no error')
         const reader = new FileReader()
-        console.log(reader)
         
         !isVideo ? reader.addEventListener('load', () => handleUpload(file, reader.result)) : handleUpload(file, reader.result)
         reader.readAsDataURL(file)
@@ -60,15 +58,12 @@ function Uploader({ isVideo, allowedFileTypes, maxFileSize, label, onChange, mul
   }
 
   function handleUpload(file, fileBase64) {
-      console.log('hi')
     // Create form data to submit to services
     const formData = new FormData()
     formData.append('image_id', file)
-    console.log(formData)
 
     apiUploadFiles(formData)
       .then(({ data }) => {
-          console.log(data)
         // Add thumbnail
         setThumbnails(thumbnails => {
           thumbnails.push(fileBase64)
@@ -87,7 +82,6 @@ function Uploader({ isVideo, allowedFileTypes, maxFileSize, label, onChange, mul
       .catch(error => {
         setErrors(errors => {
           errors.push(error)
-          console.log(error)
           return [...errors]
         })
       })
@@ -96,7 +90,6 @@ function Uploader({ isVideo, allowedFileTypes, maxFileSize, label, onChange, mul
   function handleFileValidationErrors(file) {
     const isValidMimeType = checkMimeType(allowedFileTypes, file)
     const isValidSize = checkFileSize(maxFileSize, file)
-    console.log('file', file)
 
     // Create mime error message based on allowed file types
     const mimeTypeError = ERROR_MIME_TYPE.replace('%mime_types%', allowedFileTypes.toString().replace(/,/g, ', ')).replace(

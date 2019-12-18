@@ -131,7 +131,6 @@ function Pictures() {
 
     const filterPictures = pictureData ? pictureData.filter(item => item.year === currentValue) : []
     let fileIds = filterPictures.length ? filterPictures.map(item => item.media_id) : []
-    console.log('filter', filterPictures)
 
     const onClick = (year) => {
         setOpenCarousel(true)

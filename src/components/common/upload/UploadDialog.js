@@ -8,13 +8,8 @@ function UploadDialog({open, close, isVideo, allowedFileTypes, maxFileSize, labe
     const [initialFileDate, setInitialFileDate] = useState(null)
     const [endFileDate, setEndFileDate] = useState(null)
     const [fileTitle, setFileTitle] = useState('')
-    const [formData, setFormData] = useState()
-    console.log(formData)
-    // const {createMedia} = useFiles() 
     const year = initialFileDate ? new Date(initialFileDate).getFullYear() : null
     const createButtonDisabled = !fileID
-    console.log(year)
-    console.log('file id', fileID)
     const object = {
         title: fileTitle,
         date_created: initialFileDate,
@@ -49,7 +44,7 @@ function UploadDialog({open, close, isVideo, allowedFileTypes, maxFileSize, labe
                         <TextField label={`Title of this ${isVideo ? 'video' : 'picture'}`} value={fileTitle} onChange={e => setFileTitle(e.target.value)} required InputLabelProps={{ shrink: true }}/>
                     </Grid>
                     <Grid item xs={12}>
-                        <Uploader isVideo={isVideo} maxFileSize={maxFileSize} allowedFileTypes={allowedFileTypes} onChange={onChange} label={label} haveFormData={data => setFormData(data)} />
+                        <Uploader isVideo={isVideo} maxFileSize={maxFileSize} allowedFileTypes={allowedFileTypes} onChange={onChange} label={label} />
                     </Grid>
                 </Grid>
             </DialogContent>

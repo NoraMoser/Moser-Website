@@ -21,18 +21,13 @@ function Carousel({ open, onClose, fileIds = [], classes, onDelete}) {
   const {pictureData} = useFiles()
   const media = selectedFileId ? pictureData.find(item => item.media_id === selectedFileId) : []
     
-  console.log(media)
-
   const imageUrl = useCallback(
     () => {
         apiGetFileImageUrl(selectedFileId).then(({config}) => {
-            console.log('car', config.url)
             setUrl(config.url)
             return config.url
         })
     }, [setUrl, selectedFileId] )
-
-    console.log('url', url)
 
 
     useEffect(() => {

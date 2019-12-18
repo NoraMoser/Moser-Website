@@ -25,11 +25,9 @@ export default function useFiles() {
     const uploadFiles = ({formData}) => {
         apiUploadFiles(formData)
           .then(({ data }) => {
-              console.log(data)
             return data.id
           })
           .catch(error => {
-              console.log(error)
             setError(error)
           })
     }

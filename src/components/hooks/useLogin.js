@@ -12,14 +12,12 @@ export default function useLogin() {
 
     const sendEmail = email => {
         apiSendEmail(email)
-        .then(({data}) => {
-            console.log(data)
-        })
+        .then(({data}) => data)
         .catch(error => setError(error))
     }
     const signIn = (signInObject) => {
         apiSignIn(signInObject)
-        .then(({data}) => console.log(data))
+        .then(({data}) => data)
         .catch(error => setError(error))
     }
     return {

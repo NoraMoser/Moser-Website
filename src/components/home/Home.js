@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 import useInterval from '../hooks/useInterval'
 import { makeStyles } from '@material-ui/styles'
 
-const images = ['disney.jpg', 'home.jpg', 'mother.jpg', 'reunited.jpg', 'soccer.jpg']
+const images = ['disney.jpg', 'home.jpg', 'mother.jpg', 'reunited.jpg', 'soccer.jpg', 'mhalloween2019.jpg', 'MoserFamilysd1.jpg', 'MoserFamilysd2.jpg', 'MoserFamilysd3.jpg', 'MoserFamilysd4.jpg', 'MoserFamilysd5.jpg',]
 
 const useStyles = makeStyles(theme => ({
     imageContainer: {
@@ -17,7 +17,6 @@ function Home() {
         useInterval(function () {
             setIntervalIndex(previousIndex => {
                 previousIndex = previousIndex + 1 < images.length ? previousIndex + 1 : 0
-                console.log('pi', previousIndex)
                 return previousIndex
             })
         }, 3000)

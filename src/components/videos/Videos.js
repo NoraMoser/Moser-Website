@@ -70,11 +70,6 @@ const useStyles = makeStyles(theme => ({
         width: '200px',
         height: '155px',
         fontSize: 16
-    },
-    otherButtons: {
-        margin: '10px',
-        width: '200px',
-        height: '155px'
     }
 
 }))
@@ -114,18 +109,6 @@ function Videos() {
                 </Grid>
                 <Grid item xs={12}>
                     <Button disabled={true} className={classes.button2019} color='primary' variant='outlined' >2019</Button>
-                </Grid>
-                <Grid item xs={12}>
-                    <Button className={classes.otherButtons} color='primary' variant='outlined' >2020</Button>
-                </Grid>
-                <Grid item xs={12}>
-                    <Button className={classes.otherButtons} color='primary' variant='outlined' >2021</Button>
-                </Grid>
-                <Grid item xs={12}>
-                    <Button className={classes.otherButtons} color='primary' variant='outlined' >2022</Button>
-                </Grid>
-                <Grid item xs={12}>
-                    <Button className={classes.otherButtons} color='primary' variant='outlined' >2023</Button>
                 </Grid>
                 <Grid item xs={12}>
                     <DialogActions className={classes.dialogButton}>
