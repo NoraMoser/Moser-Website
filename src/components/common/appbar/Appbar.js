@@ -7,6 +7,7 @@ import Dropdown from '../dropdown/Dropdown';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    backGroundColor: 'blue'
   },
   menuButton: {
     marginRight: 20,

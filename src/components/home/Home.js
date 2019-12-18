@@ -1,5 +1,4 @@
-import React, { Fragment, useState, useEffect, useCallback } from 'react'
-import { Typography } from '@material-ui/core'
+import React, { Fragment, useState } from 'react'
 import useInterval from '../hooks/useInterval'
 import { makeStyles } from '@material-ui/styles'
 

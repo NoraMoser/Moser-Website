@@ -15,7 +15,14 @@ function AddQuotesDialog({open, close}) {
 
     function onClickAddQuote() {
         createQuotes(quoteObject)
+        onClickOpenDialog()
         close()
+    }
+
+    function onClickOpenDialog() {
+        setAuthor('')
+        setAge('')
+        setQuote('')
     }
 
 
