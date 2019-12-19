@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef, useCallback, Fragment, useContext } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { withStyles, Dialog, Slide, CardHeader, CardContent, Typography, Box, DialogTitle, DialogContent, DialogActions, Button } from '@material-ui/core'
+import { withStyles, Dialog, Slide, CardHeader, CardContent, Typography, Box, DialogTitle} from '@material-ui/core'
 import styles from './styles'
 import { apiGetFileImageUrl } from '../../../utils/api'
 import CarouselButtons from './buttons/CarouselButtons'
@@ -22,6 +22,7 @@ function Carousel({ open, onClose, fileIds = [], classes, onDelete}) {
   const {pictureData} = useFiles()
   const [openDelete, setOpenDelete] = useState(false)
   const media = selectedFileId ? pictureData.find(item => item.media_id === selectedFileId) : []
+  console.log(media)
   const {deletePictures} = useFiles()
 
     
@@ -51,7 +52,7 @@ function Carousel({ open, onClose, fileIds = [], classes, onDelete}) {
   }
 
   function deleteFile() {
-    deletePictures(selectedFileId)
+    deletePictures(media._id)
     setOpenDelete(false)
   }
 

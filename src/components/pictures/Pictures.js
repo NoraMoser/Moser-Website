@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useContext } from 'react'
-import { Typography, Grid, Button, DialogActions, List, ListItem } from '@material-ui/core'
+import { Grid, Button, DialogActions, List, ListItem, Snackbar } from '@material-ui/core'
 import UploadDialog from '../common/upload/UploadDialog'
 import { ACCEPTED_FILE_TYPES, MAX_FILE_SIZE } from './constants'
 import { makeStyles } from '@material-ui/styles'
@@ -200,6 +200,12 @@ function Pictures() {
                 }
             </Grid>
             <Carousel open={openCarousel} onClose={() => setOpenCarousel(false)} fileIds={openCarousel ? fileIds : []}/>
+            <Snackbar 
+                open={!!error}
+                autoHideDuration={6000}
+                onClose={() => setError('')}
+                message={error}
+            />
         </Fragment>
     )
 }

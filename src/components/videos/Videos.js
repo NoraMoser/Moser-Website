@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useContext } from 'react'
-import { Typography, Button, Grid, DialogActions, CardActions } from '@material-ui/core'
+import { Button, Grid, DialogActions } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import UploadDialog from '../common/upload/UploadDialog'
 import { ACCEPTED_FILE_TYPES, MAX_FILE_SIZE } from './constants'

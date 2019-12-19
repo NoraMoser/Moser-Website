@@ -51,5 +51,5 @@ export const apiSignIn = async (object) => {
 }
 
 export const apiDeleteFile = async (id) => {
-    return axios.delete(`${local}/api/file/delete/${id}`)
+    return axios.delete(`${local}/api/picture/delete/${id}`)
 }

@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { apiSignUpNewUser, apiSendEmail, apiSignIn } from '../../utils/api'
+import { apiSignUpNewUser, apiSendEmail} from '../../utils/api'
 
 export default function useLogin() {
     const [error, setError] = useState('')
-    const [user, setUser] = useState()
 
     const register = (registerObject) => {
         apiSignUpNewUser(registerObject)
