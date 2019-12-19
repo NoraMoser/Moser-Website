@@ -22,7 +22,6 @@ function Carousel({ open, onClose, fileIds = [], classes, onDelete}) {
   const {pictureData} = useFiles()
   const [openDelete, setOpenDelete] = useState(false)
   const media = selectedFileId ? pictureData.find(item => item.media_id === selectedFileId) : []
-  console.log(media)
   const {deletePictures} = useFiles()
 
     
