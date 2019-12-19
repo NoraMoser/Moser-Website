@@ -143,13 +143,6 @@ function Uploader({ isVideo, allowedFileTypes, maxFileSize, label, onChange, mul
       </Button>
 
       <div className={classes.fileResultsContainer}>
-        {/* {errors.length
-          ? errors.map((error, key) => (
-              <div key={`file-error-${key}`} className={classes.error}>
-                {error}
-              </div>
-            ))
-          : null} */}
         {thumbnails.length ? thumbnails.map(createThumbNail) : null}
       </div>
     </Fragment>
