@@ -1,10 +1,11 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useContext } from 'react'
 import { Typography, Grid, Button, DialogActions, List, ListItem } from '@material-ui/core'
 import UploadDialog from '../common/upload/UploadDialog'
 import { ACCEPTED_FILE_TYPES, MAX_FILE_SIZE } from './constants'
 import { makeStyles } from '@material-ui/styles'
 import useFiles from '../hooks/useFiles'
 import Carousel from '../common/carousel/Carousel'
+import { AppContext } from '../../App'
 
 const useStyles = makeStyles(theme => ({
     button2008: {
@@ -128,6 +129,7 @@ function Pictures() {
     const {createPictures, pictureData} = useFiles() 
     const [openCarousel, setOpenCarousel] = useState(false)
     const [currentValue, setCurrentValue] = useState('')
+    const {user} = useContext(AppContext)
 
     const filterPictures = pictureData ? pictureData.filter(item => item.year === currentValue) : []
     let fileIds = filterPictures.length ? filterPictures.map(item => item.media_id) : []
@@ -188,12 +190,14 @@ function Pictures() {
                         </Grid>
                     </ListItem>
                 </List>
-                <Grid item xs={12}>
-                    <DialogActions className={classes.dialogButton}>
-                        <Button variant="outlined" className={classes.addButton} color="secondary" onClick={() => setOpenUploadDialog(true)}>Add Picture</Button>
-                    </DialogActions>
-                    <UploadDialog setFileId={setPictureFile} createMedia={createPictures} fileID={pictureFile} open={openUploadDialog} close={() => setOpenUploadDialog(false)} isVideo={false} allowedFileTypes={ACCEPTED_FILE_TYPES} maxFileSize={MAX_FILE_SIZE} label="Upload Pictures" onChange={id => setPictureFile(id)} onError={error => setError(error)} />
-                </Grid>
+                {user.data &&
+                    <Grid item xs={12}>
+                        <DialogActions className={classes.dialogButton}>
+                            <Button variant="outlined" className={classes.addButton} color="secondary" onClick={() => setOpenUploadDialog(true)}>Add Picture</Button>
+                        </DialogActions>
+                        <UploadDialog setFileId={setPictureFile} createMedia={createPictures} fileID={pictureFile} open={openUploadDialog} close={() => setOpenUploadDialog(false)} isVideo={false} allowedFileTypes={ACCEPTED_FILE_TYPES} maxFileSize={MAX_FILE_SIZE} label="Upload Pictures" onChange={id => setPictureFile(id)} onError={error => setError(error)} />
+                    </Grid>
+                }
             </Grid>
             <Carousel open={openCarousel} onClose={() => setOpenCarousel(false)} fileIds={openCarousel ? fileIds : []}/>
         </Fragment>

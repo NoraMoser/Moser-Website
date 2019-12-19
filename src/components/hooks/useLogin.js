@@ -3,6 +3,7 @@ import { apiSignUpNewUser, apiSendEmail, apiSignIn } from '../../utils/api'
 
 export default function useLogin() {
     const [error, setError] = useState('')
+    const [user, setUser] = useState()
 
     const register = (registerObject) => {
         apiSignUpNewUser(registerObject)
@@ -15,15 +16,11 @@ export default function useLogin() {
         .then(({data}) => data)
         .catch(error => setError(error))
     }
-    const signIn = (signInObject) => {
-        apiSignIn(signInObject)
-        .then(({data}) => data)
-        .catch(error => setError(error))
-    }
+    
+
     return {
         register,
         error,
-        sendEmail,
-        signIn
+        sendEmail
     }
 }

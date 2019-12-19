@@ -1,4 +1,4 @@
-import { apiUploadFiles, apiCreatePictureObject, apiGetAllPictures, apiCreateVideoObject, apiGetAllVideos, apiCreateQuotes, apiGetQuotes } from "../../utils/api"
+import { apiUploadFiles, apiCreatePictureObject, apiGetAllPictures, apiCreateVideoObject, apiGetAllVideos, apiCreateQuotes, apiGetQuotes, apiDeleteFile } from "../../utils/api"
 import { useState, useEffect, useCallback } from "react"
 
 export default function useFiles() {
@@ -50,6 +50,12 @@ export default function useFiles() {
         .catch(error => setError(error))
     }
 
+    const deletePictures = (id) => {
+        apiDeleteFile(id)
+        .then(({data}) => data)
+        .catch(error => setError(error))
+    }
+
     useEffect(() => {
         listQuotes()
         listPictures()
@@ -64,6 +70,7 @@ export default function useFiles() {
         createVideos,
         videoData,
         createQuotes,
-        quoteData
+        quoteData,
+        deletePictures
       }
 }

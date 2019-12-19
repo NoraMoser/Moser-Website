@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Button } from '@material-ui/core'
+import { AppContext } from '../../../../App'
 
-function CarouselButtons({ onPrevious, onNext, onClose, onDelete, ableToDelete }) {
+function CarouselButtons({ onPrevious, onNext, onClose, onDelete }) {
+
+  const {user} = useContext(AppContext)
+  console.log(user)
   return (
     <Grid container spacing={8}>
       <Grid item xs={4}>
@@ -20,13 +24,13 @@ function CarouselButtons({ onPrevious, onNext, onClose, onDelete, ableToDelete }
           Next File
         </Button>
       </Grid>
-      {!!ableToDelete ? (
+      {user.data ?
         <Grid item xs={12}>
           <Button variant="outlined" color="primary" onClick={onDelete} fullWidth>
             Delete File
           </Button>
         </Grid>
-      ) : null}
+      : null}
     </Grid>
   )
 }

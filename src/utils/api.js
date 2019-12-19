@@ -49,3 +49,7 @@ export const apiSendEmail = async (email) => {
 export const apiSignIn = async (object) => {
     return axios.post(`${local}/api/user/sign-in`, object)
 }
+
+export const apiDeleteFile = async (id) => {
+    return axios.delete(`${local}/api/file/delete/${id}`)
+}
