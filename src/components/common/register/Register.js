@@ -16,8 +16,8 @@ function Register({open, close}) {
         email,
         password
     }
-
-    //Abcdefg!hi1
+    //un: nmoser
+    //pw: Abcdefg!hi1
 
     function onClickRegister() {
         register(registerObject)

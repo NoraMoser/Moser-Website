@@ -10,7 +10,7 @@ import { AppContext } from '../../App'
 const useStyles = makeStyles(theme => ({
     container: {
         backgroundColor: 'black',
-        height: '100%'
+        height: 'calc(100vh)'
     },
     arthurButton: {
         backgroundImage: 'url(AFirst.jpg)',
@@ -110,7 +110,7 @@ function Videos() {
                     <Button className={classes.button2018} color='secondary' variant='outlined'  onClick={() => handleViewVideo('2018')}>2018</Button>
                 </Grid>
                 <Grid item xs={12}>
-                    <Button disabled={true} className={classes.button2019} color='primary' variant='outlined' >2019</Button>
+                    <Button className={classes.button2019} color='secondary' variant='outlined' onClick={() => handleViewVideo('2019')} >2019</Button>
                 </Grid>
                 {user.data &&
                     <Grid item xs={12}>
