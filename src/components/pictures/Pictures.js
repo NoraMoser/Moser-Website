@@ -106,6 +106,13 @@ const useStyles = makeStyles(theme => ({
         margin: '10px',
         fontSize: 20
     },
+    button2020: {
+        backgroundSize: '100% 100%',
+        width: 400,
+        height: 250,
+        margin: '10px',
+        fontSize: 20
+    },
     list: {
         margin: '50px auto'
     },
@@ -202,7 +209,7 @@ function Pictures() {
                     <Fragment>
                         <ListItem>
                             <Grid item xs={4}>
-                                <Button variant="outlined" color="secondary" onClick={() => onClick()}>2020</Button>
+                                <Button variant="outlined" color="secondary" className={classes.button2020} onClick={() => onClick()}>2020</Button>
                             </Grid>
                             <Grid item xs={4}>
                                 <Button variant="outlined" color="secondary" onClick={() => onClick()}>2021</Button>
