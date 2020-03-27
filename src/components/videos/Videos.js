@@ -121,7 +121,7 @@ function Videos() {
                 }
             </Grid>
             <VideoDialog open={openVideoDialog} close={() => setOpenVideoDialog(false)} data={dataForUrl}/>
-            <UploadDialog open={openDialog} close={() => setOpenDialog(false)} allowedFileTypes={ACCEPTED_FILE_TYPES} isVideo maxFileSize={MAX_FILE_SIZE} label="Videos" onChange={id => setVideoId(id)} fileID={videoId} createMedia={createVideos} setFileId={setVideoId} />
+            <UploadDialog title='UploadVideo' open={openDialog} close={() => setOpenDialog(false)} allowedFileTypes={ACCEPTED_FILE_TYPES} isVideo maxFileSize={MAX_FILE_SIZE} label="Videos" onChange={id => setVideoId(id)} fileID={videoId} createMedia={createVideos} setFileId={setVideoId} />
         </Fragment>
     )
 

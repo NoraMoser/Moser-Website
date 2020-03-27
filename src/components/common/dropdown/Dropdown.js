@@ -13,7 +13,8 @@ const options = [
     'Home',
     'Videos',
     'Quotes',
-    'Pictures'
+    'Pictures',
+    'Art'
   ];
 
 function Dropdown({open, anchorEl, close, history}) {

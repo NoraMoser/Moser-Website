@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Dialog, TextField, DialogContent, DialogActions, Button, Grid, DialogTitle } from '@material-ui/core'
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
-import DateFunctions from '@date-io/moment'
 import Uploader from './Uploader'
+import MomentUtils from '@date-io/moment'
 
-function UploadDialog({open, close, isVideo, allowedFileTypes, maxFileSize, label, onChange, fileID, createMedia, setFileId}) {
+function UploadDialog({open, close, isVideo, allowedFileTypes, maxFileSize, label, onChange, fileID, createMedia, setFileId, title}) {
     const [initialFileDate, setInitialFileDate] = useState(null)
     const [endFileDate, setEndFileDate] = useState(null)
     const [fileTitle, setFileTitle] = useState('')
@@ -28,10 +28,10 @@ function UploadDialog({open, close, isVideo, allowedFileTypes, maxFileSize, labe
     }
 
     return (
-    <MuiPickersUtilsProvider utils={DateFunctions}>
+    <MuiPickersUtilsProvider utils={MomentUtils}>
         <Dialog open={open} onClose={close}>
             <DialogContent>
-                <DialogTitle>Upload {isVideo ? 'Video' : 'Picture'}</DialogTitle>
+                <DialogTitle>{title}</DialogTitle>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <DatePicker label={`Date ${isVideo ? 'video' : 'picture'} ${isVideo ? 'started' : 'created'}`} value={initialFileDate} onChange={setInitialFileDate} format="YYYY-MM-DD" maxDate={new Date()}/>

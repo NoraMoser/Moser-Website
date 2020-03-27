@@ -148,11 +148,13 @@ function Pictures() {
     const [pictureFile, setPictureFile] = useState([])
     const [error, setError] = useState('')
     const classes = useStyles()
-    const {createPictures, pictureData} = useFiles() 
+    const {createPictures, pictureData, artData} = useFiles() 
     const [openCarousel, setOpenCarousel] = useState(false)
     const [currentValue, setCurrentValue] = useState('')
     const [page, setPage] = useState(1)
     const {user} = useContext(AppContext)
+
+    console.log(artData)
 
     const filterPictures = pictureData ? pictureData.filter(item => item.year === currentValue) : []
     let fileIds = filterPictures.length ? filterPictures.map(item => item.media_id) : []
@@ -239,7 +241,7 @@ function Pictures() {
                         <DialogActions className={classes.dialogButton}>
                             <Button variant="outlined" className={classes.addButton} color="secondary" onClick={() => setOpenUploadDialog(true)}>Add Picture</Button>
                         </DialogActions>
-                        <UploadDialog setFileId={setPictureFile} createMedia={createPictures} fileID={pictureFile} open={openUploadDialog} close={() => setOpenUploadDialog(false)} isVideo={false} allowedFileTypes={ACCEPTED_FILE_TYPES} maxFileSize={MAX_FILE_SIZE} label="Upload Pictures" onChange={id => setPictureFile(id)} onError={error => setError(error)} />
+                        <UploadDialog title='Upload Pictures' setFileId={setPictureFile} createMedia={createPictures} fileID={pictureFile} open={openUploadDialog} close={() => setOpenUploadDialog(false)} isVideo={false} allowedFileTypes={ACCEPTED_FILE_TYPES} maxFileSize={MAX_FILE_SIZE} label="Upload Pictures" onChange={id => setPictureFile(id)} onError={error => setError(error)} />
                     </Grid>
                 }
             </Grid>

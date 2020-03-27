@@ -7,6 +7,7 @@ const Home = lazy(() => import('./components/home/Home'))
 const Videos = lazy(() => import('./components/videos/Videos'))
 const Quotes = lazy(() => import('./components/quotes/Quotes'))
 const Pictures = lazy(() => import('./components/pictures/Pictures'))
+const Art = lazy(() => import('./components/art/Art'))
 
 export default function Routes() {
     return (
@@ -19,6 +20,8 @@ export default function Routes() {
                     <Route exact={true} path="/Videos" component={Videos} />
                     <Route exact={true} path="/Quotes" component={Quotes} />
                     <Route exact={true} path="/Pictures" component={Pictures} />
+                    <Route exact={true} path="/Art" component={Art} />
+
                 </Switch>
             </Suspense>
           </BrowserRouter>
