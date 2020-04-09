@@ -18,7 +18,9 @@ function CarouselThumbnail({ fileId, fileIndex, onClick, classes }) {
 
 
     useEffect(() => {
-        imageUrl()
+    if(!!fileId) {
+      imageUrl()
+    }
     }, [imageUrl])
 
   return (

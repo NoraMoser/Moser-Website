@@ -37,7 +37,9 @@ function Carousel({ open, onClose, fileIds = [], classes, onDelete, picture}) {
 
 
     useEffect(() => {
-    imageUrl()
+      if (!!selectedFileId) {
+        imageUrl()
+      }
     }, [imageUrl])
 
   function handlePreviousFile() {
