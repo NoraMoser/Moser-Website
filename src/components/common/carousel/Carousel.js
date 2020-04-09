@@ -8,20 +8,22 @@ import CarouseleDialogClose from './buttons/CarouselDialogClose'
 import CarouselThumbnail from './thumbnail/CarouselThumbnail'
 import useFiles from '../../hooks/useFiles'
 import DeleteFile from './dialog/DeleteFile'
+import { useArtData } from '../../art/hooks/useArtData'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
 })
 
-function Carousel({ open, onClose, fileIds = [], classes, onDelete}) {
+function Carousel({ open, onClose, fileIds = [], classes, onDelete, picture}) {
   const [selectedFileId, setSelectedFileId] = useState(null)
   const [selectedFileIdIndex, setSelectedFileIdIndex] = useState(null)
   const [thumbnails, setThumbnails] = useState(null)
   const [url, setUrl] = useState()
   const refFileIds = useRef(fileIds)
   const {pictureData} = useFiles()
+  const {artData} = useArtData()
   const [openDelete, setOpenDelete] = useState(false)
-  const media = selectedFileId ? pictureData.find(item => item.media_id === selectedFileId) : []
+  const media = !!selectedFileId && !!picture ? pictureData.find(item => item.media_id === selectedFileId) : !!selectedFileId && !picture ? artData.find(item => item.media_id === selectedFileId) : []
   const {deletePictures} = useFiles()
 
     
@@ -88,7 +90,7 @@ function Carousel({ open, onClose, fileIds = [], classes, onDelete}) {
         titleTypographyProps={{ className: classes.text }}
         action={<CarouseleDialogClose onClose={onClose} />}
       />
-      <DialogTitle className={classes.title}>{selectedFileId ? media.title : ''}</DialogTitle>
+      <DialogTitle className={classes.title}>{!!selectedFileId && media.title }</DialogTitle>
       <CardContent className={classes.fileContainer}>
           <Typography className={classes.title}>Picture taken: {new Date(media.date_created).toLocaleDateString()}</Typography>
           <Box>
@@ -103,8 +105,10 @@ function Carousel({ open, onClose, fileIds = [], classes, onDelete}) {
           onClose={onClose}
           onDelete={() => setOpenDelete(true)}
           ableToDelete={!!onDelete}
+          picture={picture}
         />
-        <DeleteFile open={openDelete} close={() => setOpenDelete(false)} deleteFile={deleteFile} media={media}/>
+        {!!picture &&
+        <DeleteFile open={openDelete} close={() => setOpenDelete(false)} deleteFile={deleteFile} media={media}/>}
       </CardContent>
     </Dialog>
   )

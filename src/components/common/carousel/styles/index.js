@@ -10,7 +10,7 @@ const styles = theme => {
         color: 'white'
       },
       textNoFile: {
-        color: theme.palette.common.white,
+        color: theme.palette.common.white, 
         width: '100%',
         textAlign: 'center',
         marginTop: '33vh'

@@ -2,159 +2,24 @@ import React, { Fragment, useState, useContext } from 'react'
 import { Grid, Button, DialogActions, List, ListItem, Snackbar } from '@material-ui/core'
 import UploadDialog from '../common/upload/UploadDialog'
 import { ACCEPTED_FILE_TYPES, MAX_FILE_SIZE } from './constants'
-import { makeStyles } from '@material-ui/styles'
 import useFiles from '../hooks/useFiles'
 import Carousel from '../common/carousel/Carousel'
 import { AppContext } from '../../App'
 import Pagination from '../common/pagination/Pagination'
+import {useStyles} from './styles/index'
 
-const useStyles = makeStyles(theme => ({
-    button2008: {
-        backgroundImage: 'url(2008.jpg)',
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
-    button2009: {
-        backgroundImage: 'url(2009.jpg)',
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
-    button2010: {
-        backgroundImage: 'url(2010.jpg)',
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
-    button2011: {
-        backgroundImage: 'url(2011.jpg)',
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
-    button2012: {
-        backgroundImage: 'url(2012.jpg)',
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
-    button2013: {
-        backgroundImage: 'url(2013.jpg)',
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
-    button2014: {
-        backgroundImage: 'url(2014.jpg)',
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
-    button2015: {
-        backgroundImage: 'url(2015.jpg)',
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
-    button2016: {
-        backgroundImage: 'url(2016.jpg)',
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
 
-    button2017: {
-        backgroundImage: 'url(2017.jpg)',
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
-    button2018: {
-        backgroundImage: 'url(2018.jpg)',
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
-    button2019: {
-        backgroundImage: 'url(2019.jpg)',
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
-    button2020: {
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
-    button2021: {
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
-    button2022: {
-        backgroundSize: '100% 100%',
-        width: 400,
-        height: 250,
-        margin: '10px',
-        fontSize: 20
-    },
-    list: {
-        margin: '50px auto'
-    },
-    root: {
-        backgroundColor: 'black',
-        height: 'calc(100vh)'
-    },
-    addButton: {
-        position: 'absolute',
-        top: 14
-    },
-    dialogButton: {
-        margin: '5%'
-    }
-}))
 
 function Pictures() {
     const [openUploadDialog, setOpenUploadDialog] = useState(false)
     const [pictureFile, setPictureFile] = useState([])
     const [error, setError] = useState('')
     const classes = useStyles()
-    const {createPictures, pictureData, artData} = useFiles() 
+    const {createPictures, pictureData} = useFiles() 
     const [openCarousel, setOpenCarousel] = useState(false)
     const [currentValue, setCurrentValue] = useState('')
     const [page, setPage] = useState(1)
     const {user} = useContext(AppContext)
-
-    console.log(artData)
 
     const filterPictures = pictureData ? pictureData.filter(item => item.year === currentValue) : []
     let fileIds = filterPictures.length ? filterPictures.map(item => item.media_id) : []
@@ -245,7 +110,7 @@ function Pictures() {
                     </Grid>
                 }
             </Grid>
-            <Carousel open={openCarousel} onClose={() => setOpenCarousel(false)} fileIds={openCarousel ? fileIds : []}/>
+            <Carousel open={openCarousel} onClose={() => setOpenCarousel(false)} fileIds={openCarousel ? fileIds : []} picture/>
             <Pagination page={page} total={15} limit={12} onChange={onChangePagination}/>
             <Snackbar 
                 open={!!error}

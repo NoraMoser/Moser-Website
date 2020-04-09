@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Grid, Button } from '@material-ui/core'
 import { AppContext } from '../../../../App'
 
-function CarouselButtons({ onPrevious, onNext, onClose, onDelete }) {
+function CarouselButtons({ onPrevious, onNext, onClose, onDelete, picture }) {
 
   const {user} = useContext(AppContext)
   console.log(user)
@@ -24,7 +24,7 @@ function CarouselButtons({ onPrevious, onNext, onClose, onDelete }) {
           Next File
         </Button>
       </Grid>
-      {user.data ?
+      {!!user.data && !!picture ?
         <Grid item xs={12}>
           <Button variant="outlined" color="primary" onClick={onDelete} fullWidth>
             Delete File
