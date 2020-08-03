@@ -13,9 +13,8 @@ import {useStyles} from './styles/index'
 function Pictures() {
     const [openUploadDialog, setOpenUploadDialog] = useState(false)
     const [pictureFile, setPictureFile] = useState([])
-    const [error, setError] = useState('')
     const classes = useStyles()
-    const {createPictures, pictureData} = useFiles() 
+    const {createPictures, pictureData, message, setMessage} = useFiles() 
     const [openCarousel, setOpenCarousel] = useState(false)
     const [currentValue, setCurrentValue] = useState('')
     const [page, setPage] = useState(1)
@@ -106,18 +105,18 @@ function Pictures() {
                         <DialogActions className={classes.dialogButton}>
                             <Button variant="outlined" className={classes.addButton} color="secondary" onClick={() => setOpenUploadDialog(true)}>Add Picture</Button>
                         </DialogActions>
-                        <UploadDialog title='Upload Pictures' setFileId={setPictureFile} createMedia={createPictures} fileID={pictureFile} open={openUploadDialog} close={() => setOpenUploadDialog(false)} isVideo={false} allowedFileTypes={ACCEPTED_FILE_TYPES} maxFileSize={MAX_FILE_SIZE} label="Upload Pictures" onChange={id => setPictureFile(id)} onError={error => setError(error)} />
+                        <UploadDialog title='Upload Pictures' setFileId={setPictureFile} createMedia={createPictures} fileID={pictureFile} open={openUploadDialog} close={() => setOpenUploadDialog(false)} isVideo={false} allowedFileTypes={ACCEPTED_FILE_TYPES} maxFileSize={MAX_FILE_SIZE} label="Upload Pictures" onChange={id => setPictureFile(id)} />
                     </Grid>
                 }
-            </Grid>
             <Carousel open={openCarousel} onClose={() => setOpenCarousel(false)} fileIds={openCarousel ? fileIds : []} picture/>
             <Pagination page={page} total={15} limit={12} onChange={onChangePagination}/>
             <Snackbar 
-                open={!!error}
+                open={!!message}
                 autoHideDuration={6000}
-                onClose={() => setError('')}
-                message={error}
+                onClose={() => setMessage('')}
+                message={message}
             />
+            </Grid>
         </Fragment>
     )
 }

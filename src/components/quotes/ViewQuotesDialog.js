@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dialog, Grid, Typography, DialogContent } from '@material-ui/core'
+import { Dialog, Grid, Typography, DialogContent, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
 const useStyles = makeStyles(theme => ({
@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function ViewQuotesDialog({open, close, data}) {
+function ViewQuotesDialog({open, close, data, onClickRandomQuote}) {
     const classes = useStyles()
     
         return (
@@ -24,6 +24,11 @@ function ViewQuotesDialog({open, close, data}) {
                     </DialogContent>
                 </Grid>
             </Grid>
+            <Grid container spacing={3} justify="flex-end">
+                <Grid item xs={'auto'}>
+                    <Button onClick={onClickRandomQuote}>Next</Button>
+                </Grid>
+            </Grid> 
         </Dialog>
         )
 

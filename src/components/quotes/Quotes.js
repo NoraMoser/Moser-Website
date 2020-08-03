@@ -63,7 +63,7 @@ function Quotes() {
                 </Grid>
             </Grid>
             <AddQuotesDialog open={openQuoteDialog} close={() => setOpenQuoteDialog(false)}/>
-            <ViewQuotesDialog open={openViewQuote} close={() => setOpenViewQuote(false)} data={quoteData ? quoteData[index] : []} />
+            <ViewQuotesDialog open={openViewQuote} close={() => setOpenViewQuote(false)} data={quoteData ? quoteData[index] : []} onClickRandomQuote={onClickRandomQuote} />
         </Fragment>
     )
 }

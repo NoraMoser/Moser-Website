@@ -40,7 +40,7 @@ function Carousel({ open, onClose, fileIds = [], classes, onDelete, picture}) {
       if (!!selectedFileId) {
         imageUrl()
       }
-    }, [imageUrl])
+    }, [imageUrl, selectedFileId])
 
   function handlePreviousFile() {
     const previousIndex = selectedFileIdIndex - 1 !== -1 ? selectedFileIdIndex - 1 : fileIds.length - 1

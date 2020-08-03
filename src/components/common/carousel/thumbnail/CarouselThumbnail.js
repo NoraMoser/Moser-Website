@@ -21,7 +21,7 @@ function CarouselThumbnail({ fileId, fileIndex, onClick, classes }) {
     if(!!fileId) {
       imageUrl()
     }
-    }, [imageUrl])
+    }, [imageUrl, fileId])
 
   return (
     <Fragment>

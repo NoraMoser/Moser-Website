@@ -3,7 +3,10 @@ import { Button, ListItemIcon, List, ListItem, makeStyles } from '@material-ui/c
 
 const useStyles = makeStyles(theme => ({
     pagination: {
-        backgroundColor: theme.palette.primary.light
+        backgroundColor: theme.palette.primary.light,
+        position: 'fixed',
+        bottom: 0,
+        width: '100%',
     }
 }))
 

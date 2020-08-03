@@ -99,6 +99,7 @@ export const useStyles = makeStyles(theme => ({
         fontSize: 20
     },
     button2020: {
+        backgroundImage: 'url(plane.jpg)',
         backgroundSize: '100% 100%',
         width: 400,
         height: 250,
@@ -124,7 +125,7 @@ export const useStyles = makeStyles(theme => ({
     },
     root: {
         backgroundColor: 'black',
-        height: 'calc(100vh)'
+        height: '100%'
     },
     addButton: {
         position: 'absolute',
