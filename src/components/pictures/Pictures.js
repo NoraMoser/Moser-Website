@@ -100,14 +100,14 @@ function Pictures() {
                             </ListItem>
                     </Fragment>}
                 </List>
-                {user.data &&
+                {/* {user.data && */}
                     <Grid item xs={12}>
                         <DialogActions className={classes.dialogButton}>
                             <Button variant="outlined" className={classes.addButton} color="secondary" onClick={() => setOpenUploadDialog(true)}>Add Picture</Button>
                         </DialogActions>
                         <UploadDialog title='Upload Pictures' setFileId={setPictureFile} createMedia={createPictures} fileID={pictureFile} open={openUploadDialog} close={() => setOpenUploadDialog(false)} isVideo={false} allowedFileTypes={ACCEPTED_FILE_TYPES} maxFileSize={MAX_FILE_SIZE} label="Upload Pictures" onChange={id => setPictureFile(id)} />
                     </Grid>
-                }
+                {/* } */}
             <Carousel open={openCarousel} onClose={() => setOpenCarousel(false)} fileIds={openCarousel ? fileIds : []} picture/>
             <Pagination page={page} total={15} limit={12} onChange={onChangePagination}/>
             <Snackbar 

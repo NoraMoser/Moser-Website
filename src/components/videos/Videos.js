@@ -7,10 +7,11 @@ import useFiles from '../hooks/useFiles'
 import VideoDialog from './VideoDialog'
 import { AppContext } from '../../App'
 
+
 const useStyles = makeStyles(theme => ({
     container: {
         backgroundColor: 'black',
-        height: 'calc(100vh)'
+        height: '100%'
     },
     arthurButton: {
         backgroundImage: 'url(AFirst.jpg)',
@@ -35,7 +36,7 @@ const useStyles = makeStyles(theme => ({
         top: 14
     },
     dialogButton: {
-        margin: '5%'
+        margin: '7%'
     },
     otherDialogButton: {
         margin: '49%'
@@ -112,13 +113,13 @@ function Videos() {
                 <Grid item xs={12}>
                     <Button className={classes.button2019} color='secondary' variant='outlined' onClick={() => handleViewVideo('2019')} >2019</Button>
                 </Grid>
-                {user.data &&
+                {/* {user.data && */}
                     <Grid item xs={12}>
                         <DialogActions className={classes.dialogButton}>
                             <Button className={classes.addButton} color='secondary' variant='outlined' onClick={() => setOpenDialog(true)}>Add Videos</Button>
                         </DialogActions>
                     </Grid>
-                }
+                {/* } */}
             </Grid>
             <VideoDialog open={openVideoDialog} close={() => setOpenVideoDialog(false)} data={dataForUrl}/>
             <UploadDialog title='UploadVideo' open={openDialog} close={() => setOpenDialog(false)} allowedFileTypes={ACCEPTED_FILE_TYPES} isVideo maxFileSize={MAX_FILE_SIZE} label="Videos" onChange={id => setVideoId(id)} fileID={videoId} createMedia={createVideos} setFileId={setVideoId} />

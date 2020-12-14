@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
         height: 'calc(100vh)'
     },
     dialogButton: {
-        margin: '5%'
+        margin: '7%'
     },
     arthurAndLachlanButton: {
         height: '300px',

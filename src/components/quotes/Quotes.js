@@ -21,14 +21,14 @@ const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: 'black',
         color: 'white',
-        height: 'calc(100vh)'
+        height: '100%'
     },
     addQuote: {
         position: 'absolute',
         top: 14,
     },
     dialogButton: {
-        margin: '5%'
+        margin: '7%'
     }
 }))
 

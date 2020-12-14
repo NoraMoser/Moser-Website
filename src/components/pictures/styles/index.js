@@ -132,6 +132,6 @@ export const useStyles = makeStyles(theme => ({
         top: 14
     },
     dialogButton: {
-        margin: '5%'
+        margin: '7%'
     }
 }))

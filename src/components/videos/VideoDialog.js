@@ -17,7 +17,7 @@ function VideoDialog({ data, open, close}) {
                 <Grid item xs={12}>
                         <Typography variant="h5">{item.title}</Typography>
                         <Typography>Date: {new Date(item.date_created).toLocaleDateString()} - {new Date(item.date_ended).toLocaleDateString()}</Typography>
-                        <video width="700" height="auto" controls>
+                        <video preload="auto" width="700" height="auto" controls>
                             <source src={`http://localhost:8000/api/file/${item.media_id}`} type="video/mp4" />
                         </video>
                 </Grid>
