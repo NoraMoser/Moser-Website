@@ -22,6 +22,8 @@ export default function ArtDialog({open, close, maxFileSize, allowedFileTypes, o
         setInitialFileDate(null)
         setTitle('')
         setFileId('')
+        setAge(0)
+        setName('')
         close()
     }
 

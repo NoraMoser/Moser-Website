@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: 16
     },
     button2020: {
-        // backgroundImage: 'url(2019vidbutton.jpg)',
+        backgroundImage: 'url(2020vidbutton.jpg)',
         backgroundSize: '100% 100%',
         margin: '10px',
         width: '200px',

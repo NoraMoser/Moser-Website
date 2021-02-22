@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, makeStyles, Grid, DialogActions } from "@material-ui/core";
+import { Button, makeStyles, Grid, DialogActions, Typography } from "@material-ui/core";
 import { Fragment, useState } from "react";
 import {useArtData} from "./hooks/useArtData";
 import ArtDialog from './dialog/ArtDialog';
@@ -14,14 +14,23 @@ const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: 'black',
         color: 'white',
-        height: 'calc(100vh)'
+        height: '100%'
     },
     dialogButton: {
         margin: '7%'
     },
-    arthurAndLachlanButton: {
-        height: '300px',
-        width: 'auto',
+    arthurButton: {
+        backgroundImage: 'url(AArtbutton.jpg)',
+        backgroundSize: '100% 100%',
+        height: '400px',
+        width: '300px',
+        marginBottom: 'calc(100vh - 500px)'
+    },
+    lachlanButton: {
+        backgroundImage: 'url(LArtbutton.jpg)',
+        backgroundSize: '100% 100%',
+        height: '400px',
+        width: '300px',
         marginBottom: 'calc(100vh - 500px)'
     }
 }))
@@ -48,19 +57,22 @@ export default function Art() {
         <Fragment>
             <Grid className={classes.root} container spacing={3}>
                 <Grid item xs={12}>
+                    <Typography variant="h3">Artwork</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                    <Button className={classes.arthurButton} variant="contained" color="primary" onClick={() => handleOpenCarousel('Arthur')}></Button>
+                </Grid>
+                <Grid item xs={6}>
+                    <Button className={classes.lachlanButton} variant="contained" color="primary" onClick={() => handleOpenCarousel('Lachlan')}></Button>
+                </Grid>
+                <Grid item xs={12}>
                     <DialogActions className={classes.dialogButton}>
                         <Button variant="outlined" color="secondary" className={classes.addArtButton} onClick={() => setOpenDialog(true)}>Add Artwork</Button>
                     </DialogActions>
                 </Grid>
-                <Grid item xs={6}>
-                    <Button className={classes.arthurAndLachlanButton} variant="contained" color="primary" onClick={() => handleOpenCarousel('Arthur')}>Arthur</Button>
-                </Grid>
-                <Grid item xs={6}>
-                    <Button className={classes.arthurAndLachlanButton} variant="contained" color="primary" onClick={() => handleOpenCarousel('Lachlan')}>Lachlan</Button>
-                </Grid>
             </Grid>
         <ArtDialog open={openDialog} close={() => setOpenDialog(false)} maxFileSize={MAX_FILE_SIZE} allowedFileTypes={ACCEPTED_FILE_TYPES} onChange={id => setArtFile(id)} label='Upload Artwork' fileId={artFile} createMedia={createArt} setFileId={setArtFile}/>
-        <Carousel open={openCarousel} onClose={() => setOpenCarousel(false)} fileIds={openCarousel ? fileIDs : []}/>
+        <Carousel art open={openCarousel} onClose={() => setOpenCarousel(false)} fileIds={openCarousel ? fileIDs : []}/>
         </Fragment>
     )
 }

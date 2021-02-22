@@ -14,7 +14,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
 })
 
-function Carousel({ open, onClose, fileIds = [], classes, onDelete, picture}) {
+function Carousel({ art, open, onClose, fileIds = [], classes, onDelete, picture}) {
   const [selectedFileId, setSelectedFileId] = useState(null)
   const [selectedFileIdIndex, setSelectedFileIdIndex] = useState(null)
   const [thumbnails, setThumbnails] = useState(null)
@@ -25,7 +25,7 @@ function Carousel({ open, onClose, fileIds = [], classes, onDelete, picture}) {
   const [openDelete, setOpenDelete] = useState(false)
   const media = !!selectedFileId && !!picture ? pictureData.find(item => item.media_id === selectedFileId) : !!selectedFileId && !picture ? artData.find(item => item.media_id === selectedFileId) : []
   const {deletePictures} = useFiles()
-
+console.log(media)
     
   const imageUrl = useCallback(
     () => {
@@ -93,8 +93,12 @@ function Carousel({ open, onClose, fileIds = [], classes, onDelete, picture}) {
         action={<CarouseleDialogClose onClose={onClose} />}
       />
       <DialogTitle className={classes.title}>{!!selectedFileId && media.title }</DialogTitle>
+      {!!art ? 
+      <CardContent>
+        <Typography className={classes.title}>Age: {media.age}</Typography>
+      </CardContent> : null}
       <CardContent className={classes.fileContainer}>
-          <Typography className={classes.title}>Picture taken: {new Date(media.date_created).toLocaleDateString()}</Typography>
+          <Typography className={classes.title}>Picture taken: {new Date(media.date_created).toLocaleDateString()} </Typography>
           <Box>
             <img alt="Moser" src={url || ''} className={classes.fileDisplay} />
           </Box>
