@@ -80,6 +80,22 @@ const useStyles = makeStyles(theme => ({
         width: '200px',
         height: '155px',
         fontSize: 16
+    },
+    button2021: {
+        backgroundImage: 'url(2021video.jpg)',
+        backgroundSize: '100% 100%',
+        margin: '10px',
+        width: '200px',
+        height: '155px',
+        fontSize: 16
+    },
+    button2022: {
+        backgroundImage: 'url(2022vidbutton.jpg)',
+        backgroundSize: '100% 100%',
+        margin: '10px',
+        width: '200px',
+        height: '155px',
+        fontSize: 16
     }
 
 }))
@@ -123,6 +139,12 @@ function Videos() {
                 </Grid>
                 <Grid item xs={12}>
                     <Button className={classes.button2020} color='secondary' variant='outlined' onClick={() => handleViewVideo('2020')} >2020</Button>
+                </Grid>
+                <Grid item xs={12}>
+                    <Button className={classes.button2021} color='secondary' variant='outlined' onClick={() => handleViewVideo('2021')} >2021</Button>
+                </Grid>
+                <Grid item xs={12}>
+                    <Button className={classes.button2022} color='secondary' variant='outlined' onClick={() => handleViewVideo('2022')} >2022</Button>
                 </Grid>
                 {/* {user.data && */}
                     <Grid item xs={12}>
