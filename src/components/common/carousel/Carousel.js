@@ -23,9 +23,10 @@ function Carousel({ art, open, onClose, fileIds = [], classes, onDelete, picture
   const {pictureData} = useFiles()
   const {artData} = useArtData()
   const [openDelete, setOpenDelete] = useState(false)
-  const media = !!selectedFileId && !!picture ? pictureData.find(item => item.media_id === selectedFileId) : !!selectedFileId && !picture ? artData.find(item => item.media_id === selectedFileId) : []
+  const media = !!selectedFileId && !!picture ? pictureData.find(item => item.media_id === fileIds[selectedFileIdIndex]) : !!selectedFileId && !!art ? artData.find(item => item.media_id === fileIds[selectedFileIdIndex]) : []
   const {deletePictures} = useFiles()
-console.log(media)
+  console.log(fileIds)
+  console.log(selectedFileId, selectedFileIdIndex, fileIds[selectedFileIdIndex])
     
   const imageUrl = useCallback(
     () => {
@@ -43,7 +44,8 @@ console.log(media)
     }, [imageUrl, selectedFileId])
 
   function handlePreviousFile() {
-    const previousIndex = selectedFileIdIndex - 1 !== -1 ? selectedFileIdIndex - 1 : fileIds.length - 1
+    const previousIndex = selectedFileIdIndex !== -1 ? selectedFileIdIndex - 1 : fileIds.length - 1
+    console.log(previousIndex)
     setSelectedFileIdIndex(previousIndex)
     setSelectedFileId(fileIds[previousIndex])
   }
@@ -67,12 +69,15 @@ console.log(media)
         setSelectedFileIdIndex(0)
         const thumbnails = fileIds.map((fileId, key) => (
           <CarouselThumbnail
-            key={`file-thumbnail-${key}`}
-            fileId={fileId}
-            fileIndex={key}
-            onClick={() => {
-              setSelectedFileId(fileId)
-              setSelectedFileIdIndex(key)
+          key={`file-thumbnail-${key}`}
+          fileId={fileId}
+          fileIdArray={fileIds}
+          //this key is wrong for artwork
+          fileIndex={key}
+          onClick={() => {
+              console.log(key)
+              setSelectedFileIdIndex(key + 1)
+              setSelectedFileId(fileIds[key + 1])
             }}
           />
         ))
@@ -113,7 +118,7 @@ console.log(media)
           ableToDelete={!!onDelete}
           picture={picture}
         />
-        {!!picture &&
+        {!!picture && !!art &&
         <DeleteFile open={openDelete} close={() => setOpenDelete(false)} deleteFile={deleteFile} media={media}/>}
       </CardContent>
     </Dialog>

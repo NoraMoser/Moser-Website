@@ -44,7 +44,7 @@ export default function Art() {
     const [name, setName] = useState('')
 
     const filterArtByName = artData.filter(item => item.name === name)
-    const fileIDs = !!filterArtByName && filterArtByName.map(item => item.media_id)
+    const fileIDs = filterArtByName.length ? filterArtByName.map(item => item.media_id) : []
 
     const handleOpenCarousel = name => {
         setOpenCarousel(true)

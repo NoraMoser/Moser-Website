@@ -5,8 +5,9 @@ import styles from '../styles'
 import { apiGetFileImageUrl } from '../../../../utils/api'
 
 
-function CarouselThumbnail({ fileId, fileIndex, onClick, classes }) {
+function CarouselThumbnail({ fileId, fileIndex, onClick, classes, fileIdArray }) {
     const [url, setUrl] = useState()
+    // console.log(fileIdArray)
 
     const imageUrl = useCallback(
         () => {
@@ -25,9 +26,7 @@ function CarouselThumbnail({ fileId, fileIndex, onClick, classes }) {
 
   return (
     <Fragment>
-      <Tooltip title={`File ${fileIndex + 1}`} placement="top">
         <div onClick={onClick} className={classes.thumbnailButton} style={{ marginLeft: fileIndex * 158 }} />
-      </Tooltip>
       <img alt="Thumbnail" src={url || ''} className={classes.fileThumbnail} aria-label="CarouselThumbnail" />
     </Fragment>
   )

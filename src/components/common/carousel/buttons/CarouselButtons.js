@@ -6,7 +6,7 @@ import { AppContext } from '../../../../App'
 function CarouselButtons({ onPrevious, onNext, onClose, onDelete, picture }) {
 
   const {user} = useContext(AppContext)
-  console.log(user)
+  // console.log(user)
   return (
     <Grid container spacing={8}>
       <Grid item xs={4}>
