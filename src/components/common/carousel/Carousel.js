@@ -75,7 +75,6 @@ function Carousel({ art, open, onClose, fileIds = [], classes, onDelete, picture
           //this key is wrong for artwork
           fileIndex={key}
           onClick={() => {
-              console.log(key)
               setSelectedFileIdIndex(key + 1)
               setSelectedFileId(fileIds[key + 1])
             }}

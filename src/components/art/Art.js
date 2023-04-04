@@ -72,7 +72,7 @@ export default function Art() {
                 </Grid>
             </Grid>
         <ArtDialog open={openDialog} close={() => setOpenDialog(false)} maxFileSize={MAX_FILE_SIZE} allowedFileTypes={ACCEPTED_FILE_TYPES} onChange={id => setArtFile(id)} label='Upload Artwork' fileId={artFile} createMedia={createArt} setFileId={setArtFile}/>
-        <Carousel art open={openCarousel} onClose={() => setOpenCarousel(false)} fileIds={openCarousel ? fileIDs : []}/>
+        <Carousel art open={openCarousel} onClose={() => setOpenCarousel(false)} fileIds={fileIDs}/>
         </Fragment>
     )
 }

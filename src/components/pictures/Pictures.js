@@ -108,7 +108,7 @@ function Pictures() {
                         <UploadDialog title='Upload Pictures' setFileId={setPictureFile} createMedia={createPictures} fileID={pictureFile} open={openUploadDialog} close={() => setOpenUploadDialog(false)} isVideo={false} allowedFileTypes={ACCEPTED_FILE_TYPES} maxFileSize={MAX_FILE_SIZE} label="Upload Pictures" onChange={id => setPictureFile(id)} />
                     </Grid>
                 {/* } */}
-            <Carousel open={openCarousel} onClose={() => setOpenCarousel(false)} fileIds={openCarousel ? fileIds : []} picture/>
+            <Carousel open={openCarousel} onClose={() => setOpenCarousel(false)} fileIds={fileIds} picture/>
             <Pagination page={page} total={15} limit={12} onChange={onChangePagination}/>
             <Snackbar 
                 open={!!message}
