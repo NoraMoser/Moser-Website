@@ -72,8 +72,7 @@ function Carousel({ art, open, onClose, fileIds = [], classes, onDelete, picture
           key={`file-thumbnail-${key}`}
           fileId={fileId}
           fileIdArray={fileIds}
-          //this key is wrong for artwork
-          fileIndex={key}
+          fileIndex={art ? key : key + 1}
           onClick={() => {
               setSelectedFileIdIndex(key + 1)
               setSelectedFileId(fileIds[key + 1])

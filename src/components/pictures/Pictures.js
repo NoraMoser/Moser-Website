@@ -36,22 +36,22 @@ function Pictures() {
         
     return (
         <Fragment>
-            <Grid className={classes.root} container spacing={0}>
-                <List className={classes.list}>
+            <Grid className={classes.root} container>
+                
                 {page === 1 && 
                 <Fragment>
-                    <ListItem>
-                            <Grid item xs={4}>
+                    <ListItem className={classes.listItem}>
+                            <Grid item xs={6}>
                                 <Button variant="outlined" color="secondary" className={classes.button2008} onClick={() => onClick('2008')}>2008</Button>
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <Button variant="outlined" color="secondary" className={classes.button2009} onClick={() => onClick('2009')}>2009</Button>
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <Button variant="outlined" color="secondary" className={classes.button2010} onClick={() => onClick('2010')}>2010</Button>
                             </Grid>
                         </ListItem>
-                        <ListItem>
+                        <ListItem className={classes.listItem}>
                             <Grid item xs={4}>
                                 <Button variant="outlined" color="secondary" className={classes.button2011} onClick={() => onClick('2011')}>2011</Button>
                             </Grid>
@@ -62,7 +62,7 @@ function Pictures() {
                                 <Button variant="outlined" color="secondary" className={classes.button2013} onClick={() => onClick('2013')}>2013</Button>
                             </Grid>
                         </ListItem>
-                        <ListItem>
+                        <ListItem className={classes.listItem}>
                             <Grid item xs={4}>
                                 <Button variant="outlined" color="secondary" className={classes.button2014} onClick={() => onClick('2014')}>2014</Button>
                             </Grid>
@@ -73,7 +73,7 @@ function Pictures() {
                                 <Button variant="outlined" color="secondary" className={classes.button2016} onClick={() => onClick('2016')}>2016</Button>
                             </Grid>
                         </ListItem>
-                        <ListItem>
+                        <ListItem className={classes.listItem}>
                             <Grid item xs={4}>
                                 <Button variant="outlined" color="secondary" className={classes.button2017} onClick={() => onClick('2017')}>2017</Button>
                             </Grid>
@@ -87,7 +87,7 @@ function Pictures() {
                 </Fragment>}
                     {page === 2 && 
                     <Fragment>
-                        <ListItem>
+                        <ListItem className={classes.listItem}>
                             <Grid item xs={4}>
                                 <Button variant="outlined" color="secondary" className={classes.button2020} onClick={() => onClick('2020')}>2020</Button>
                             </Grid>
@@ -99,7 +99,7 @@ function Pictures() {
                             </Grid>
                             </ListItem>
                     </Fragment>}
-                </List>
+               
                 {/* {user.data && */}
                     <Grid item xs={12}>
                         <DialogActions className={classes.dialogButton}>

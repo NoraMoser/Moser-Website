@@ -14,7 +14,8 @@ const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: 'black',
         color: 'white',
-        height: '100%'
+        height: '100%',
+        width: '100%'
     },
     dialogButton: {
         margin: '7%'
@@ -51,11 +52,9 @@ export default function Art() {
         setName(name)
     }
 
-    console.log(artData)
-
     return (
         <Fragment>
-            <Grid className={classes.root} container spacing={3}>
+            <Grid className={classes.root} container>
                 <Grid item xs={12}>
                     <Typography variant="h3">Artwork</Typography>
                 </Grid>
