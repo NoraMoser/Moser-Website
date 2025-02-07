@@ -86,7 +86,7 @@ function Carousel({ art, open, onClose, fileIds = [], classes, onDelete, picture
       setSelectedFileIdIndex(0);
     }
   }, [fileIds]);  
-
+console.log('URLLLLLL', url)
   return (
     <Dialog open={open} onClose={onClose} PaperProps={{ className: classes.paper }} TransitionComponent={Transition} fullScreen>
       <CardHeader
