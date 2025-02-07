@@ -18,7 +18,7 @@ function VideoDialog({ data, open, close}) {
                         <Typography variant="h5">{item.title}</Typography>
                         <Typography>Date: {new Date(item.date_created).toLocaleDateString()} - {new Date(item.date_ended).toLocaleDateString()}</Typography>
                         <video preload="auto" width="700" height="auto" controls>
-                            <source src={`http://localhost:8000/api/file/${item.media_id}`} type="video/mp4" />
+                            <source src={`https://noral-master.onrender.com/api/file/${item.media_id}`} type="video/mp4" />
                         </video>
                 </Grid>
             </Grid>
