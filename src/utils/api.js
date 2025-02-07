@@ -12,7 +12,7 @@ export const apiUploadFiles = async (req) => {
 }
 
 export const apiGetFileImageUrl = async (id) => {
-    return axios.get(`${production}/media/${id}`) // Update to /media/:id for image URL
+    return axios.get(`${production}/api/media/${id}`) // Update to /media/:id for image URL
 }
 
 export const apiCreatePictureObject = async (object) => {

@@ -9,7 +9,7 @@ function CarouselThumbnail({ fileId, fileIndex, onClick, classes }) {
     useEffect(() => {
         if (fileId) {
             const baseUrl = 'https://noral-master.onrender.com';
-            setUrl(`${baseUrl}/media/${fileId}`);
+            setUrl(`${baseUrl}/api/media/${fileId}`);
         }
     }, [fileId]);
 

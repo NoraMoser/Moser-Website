@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Button, IconButton, InputLabel} from '@material-ui/core'
+import { Button, IconButton, InputLabel, Tooltip } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 import { apiUploadFiles } from '../../../utils/api'
 import { checkMimeType, checkFileSize } from '../../../utils/helpers'
@@ -44,15 +44,12 @@ function Uploader({ isVideo, allowedFileTypes, maxFileSize, label, onChange, mul
     const rawFiles = [...e.target.files]
     rawFiles.forEach(file => {
       const error = handleFileValidationErrors(file)
-      if (!error) {
-        // Read file and upload
+      if (error) {
+        setErrors(prevErrors => [...prevErrors, ...error])  // Update state properly
+      } else {
         const reader = new FileReader()
-        
         !isVideo ? reader.addEventListener('load', () => handleUpload(file, reader.result)) : handleUpload(file, reader.result)
         reader.readAsDataURL(file)
-      } else {
-        errors.push(error)
-        setErrors([...errors])
       }
     })
   }
@@ -65,74 +62,74 @@ function Uploader({ isVideo, allowedFileTypes, maxFileSize, label, onChange, mul
     apiUploadFiles(formData)
       .then(({ data }) => {
         // Add thumbnail
-        setThumbnails(thumbnails => {
-          thumbnails.push(fileBase64)
-          return [...thumbnails]
-        })
+        setThumbnails(prevThumbnails => [...prevThumbnails, fileBase64])
 
         // Add file id
-        setFileIds(fileIds => {
-          if (!multifile && fileIds.length) {
-            handleRemoveFile(0)
+        setFileIds(prevFileIds => {
+          if (!multifile && prevFileIds.length) {
+            handleRemoveFile(0) // Clear the first file if not in multi-file mode
           }
-          fileIds.push(data)
-          return [...fileIds]
+          return [...prevFileIds, data]  // Add new file id
         })
       })
       .catch(error => {
-        setErrors(errors => {
-          errors.push(error)
-          return [...errors]
-        })
+        setErrors(prevErrors => [...prevErrors, error])
       })
   }
 
   function handleFileValidationErrors(file) {
+    const errors = []
     const isValidMimeType = checkMimeType(allowedFileTypes, file)
     const isValidSize = checkFileSize(maxFileSize, file)
 
-    // Create mime error message based on allowed file types
-    const mimeTypeError = ERROR_MIME_TYPE.replace('%mime_types%', allowedFileTypes.toString().replace(/,/g, ', ')).replace(
-      '%to_be%',
-      allowedFileTypes.length === 1 ? 'is' : 'are'
-    )
-    return !isValidMimeType ? `${file.name} - ${mimeTypeError}` : !isValidSize ? `${file.name} - ${ERROR_FILE_SIZE}` : ''
+    if (!isValidMimeType) {
+      const mimeTypeError = ERROR_MIME_TYPE.replace('%mime_types%', allowedFileTypes.toString().replace(/,/g, ', ')).replace(
+        '%to_be%',
+        allowedFileTypes.length === 1 ? 'is' : 'are'
+      )
+      errors.push(`${file.name} - ${mimeTypeError}`)
+    }
+
+    if (!isValidSize) {
+      errors.push(`${file.name} - ${ERROR_FILE_SIZE}`)
+    }
+
+    return errors.length > 0 ? errors : null
   }
 
   const handleRemoveFile = fileIndex => {
     // Remove file id
-    setFileIds(fileIds => {
-      fileIds.splice(fileIndex, 1)
-      return [...fileIds]
+    setFileIds(prevFileIds => {
+      const updatedFileIds = [...prevFileIds]
+      updatedFileIds.splice(fileIndex, 1)
+      return updatedFileIds
     })
 
     // Remove thumbnail
-    setThumbnails(thumbnails => {
-      thumbnails.splice(fileIndex, 1)
-      return [...thumbnails]
+    setThumbnails(prevThumbnails => {
+      const updatedThumbnails = [...prevThumbnails]
+      updatedThumbnails.splice(fileIndex, 1)
+      return updatedThumbnails
     })
 
-    setErrors([])
+    setErrors([])  // Clear errors on removal
   }
 
   const createThumbNail = (thumb, key) => (
     <Fragment key={`file-thumb-${key}`}>
-     
-            <IconButton tooltip="Remove" onClick={() => handleRemoveFile(key)}>
-              <Close color="error" />
-            </IconButton>
-        
+      <Tooltip title="Remove">
+        <IconButton onClick={() => handleRemoveFile(key)}>
+          <Close color="error" />
+        </IconButton>
+      </Tooltip>
       <object data={thumb} className={classes.fileObject} aria-label="Thumbnail" />
     </Fragment>
   )
 
-  useEffect(
-    () => {
-      const change = !multifile ? fileIds[0] || '' : fileIds
-      onChange(change)
-    },
-    [onChange, multifile, fileIds]
-  )
+  useEffect(() => {
+    const change = !multifile ? fileIds[0] || '' : fileIds
+    onChange(change)
+  }, [onChange, multifile, fileIds])
 
   return (
     <Fragment>
@@ -144,6 +141,11 @@ function Uploader({ isVideo, allowedFileTypes, maxFileSize, label, onChange, mul
 
       <div className={classes.fileResultsContainer}>
         {thumbnails.length ? thumbnails.map(createThumbNail) : null}
+      </div>
+
+      {/* Error handling */}
+      <div className={classes.error}>
+        {errors.length > 0 && errors.map((error, index) => <p key={index}>{error}</p>)}
       </div>
     </Fragment>
   )

@@ -19,7 +19,7 @@ function VideoDialog({ data, open, close }) {
                         <Typography>Date: {new Date(item.date_created).toLocaleDateString()} - {new Date(item.date_ended).toLocaleDateString()}</Typography>
                         <video preload="auto" width="700" height="auto" controls>
                             {/* Update video source URL */}
-                            <source src={`https://noral-master.onrender.com/media/${item.media_id}`} type="video/mp4" />
+                            <source src={`https://noral-master.onrender.com/api/media/${item.media_id}`} type="video/mp4" />
                         </video>
                     </Grid>
                 </Grid>

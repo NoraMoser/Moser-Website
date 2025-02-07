@@ -2,58 +2,54 @@ import { apiUploadFiles, apiCreatePictureObject, apiGetAllPictures, apiCreateVid
 import { useState, useEffect, useCallback } from "react"
 
 export default function useFiles() {
-    const [pictureData, setPictureData] = useState()
-    const [videoData, setVideoData] = useState()
-    const [message, setMessage] = useState()
-    const [quoteData, setQuoteData] = useState()
+    const [pictureData, setPictureData] = useState([])
+    const [videoData, setVideoData] = useState([])
+    const [quoteData, setQuoteData] = useState([])
+    const [message, setMessage] = useState('')
 
     const listQuotes = useCallback(
         () => {
-            apiGetQuotes().then(({data}) => setQuoteData(data)).catch(e => setMessage(e))
+            apiGetQuotes().then(({data}) => setQuoteData(data)).catch(error => setMessage(error.response?.data?.message || error.message))
         }, [setMessage, setQuoteData])
 
     const listPictures = useCallback(
         () => {
-       apiGetAllPictures().then(({data}) => setPictureData(data)).catch(e => setMessage(e))
-    }, [setMessage, setPictureData])
+            apiGetAllPictures().then(({data}) => setPictureData(data)).catch(error => setMessage(error.response?.data?.message || error.message))
+        }, [setMessage, setPictureData])
 
     const listVideos = useCallback(
         () => {
-       apiGetAllVideos().then(({data}) => setVideoData(data)).catch(e => setMessage(e))
-    }, [setMessage, setVideoData])
+            apiGetAllVideos().then(({data}) => setVideoData(data)).catch(error => setMessage(error.response?.data?.message || error.message))
+        }, [setMessage, setVideoData])
 
     const uploadFiles = ({formData}) => {
-        apiUploadFiles(formData)
-          .then(({ data }) => {
-            return data.id
-          })
-          .catch(message => {
-            setMessage(message)
-          })
+        return apiUploadFiles(formData)
+            .then(({ data }) => data.id)
+            .catch(error => setMessage(error.response?.data?.message || error.message))
     }
 
     const createPictures = (pictureObject) => {
         apiCreatePictureObject(pictureObject)
-        .then(({data}) => setMessage('success!'))
-        .catch(message => setMessage(message))
+        .then(({data}) => setMessage('Success!'))
+        .catch(error => setMessage(error.response?.data?.message || error.message))
     }
 
     const createVideos = (videoObject) => {
         apiCreateVideoObject(videoObject)
-        .then(({data}) => setMessage('success!'))
-        .catch(message => setMessage(message))
+        .then(({data}) => setMessage('Success!'))
+        .catch(error => setMessage(error.response?.data?.message || error.message))
     }
 
     const createQuotes = (quoteObject) => {
         apiCreateQuotes(quoteObject)
-        .then(({data}) => setMessage('success!'))
-        .catch(message => setMessage(message))
+        .then(({data}) => setMessage('Success!'))
+        .catch(error => setMessage(error.response?.data?.message || error.message))
     }
 
     const deletePictures = (id) => {
         apiDeleteFile(id)
-        .then(({data}) => setMessage('success!'))
-        .catch(message => setMessage(message))
+        .then(({data}) => setMessage('Success!'))
+        .catch(error => setMessage(error.response?.data?.message || error.message))
     }
 
     useEffect(() => {
@@ -73,5 +69,5 @@ export default function useFiles() {
         quoteData,
         deletePictures,
         setMessage
-      }
+    }
 }

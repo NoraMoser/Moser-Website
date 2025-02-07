@@ -30,7 +30,7 @@ function Carousel({ art, open, onClose, fileIds = [], classes, onDelete, picture
     
   const imageUrl = useCallback(() => {
     if (selectedFileId) {
-      setUrl(`https://noral-master.onrender.com/media/${selectedFileId}`);
+      setUrl(`https://noral-master.onrender.com/api/media/${selectedFileId}`);
     }
   }, [selectedFileId]);
 
