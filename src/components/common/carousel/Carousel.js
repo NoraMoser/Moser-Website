@@ -28,20 +28,15 @@ function Carousel({ art, open, onClose, fileIds = [], classes, onDelete, picture
   console.log(fileIds)
   console.log(selectedFileId, selectedFileIdIndex, fileIds[selectedFileIdIndex])
     
-  const imageUrl = useCallback(
-    () => {
-        apiGetFileImageUrl(selectedFileId).then(({config}) => {
-            setUrl(config.url)
-            return config.url
-        })
-    }, [setUrl, selectedFileId] )
+  const imageUrl = useCallback(() => {
+    if (selectedFileId) {
+      setUrl(`https://noral-master.onrender.com/media/${selectedFileId}`);
+    }
+  }, [selectedFileId]);
 
-
-    useEffect(() => {
-      if (!!selectedFileId) {
-        imageUrl()
-      }
-    }, [imageUrl, selectedFileId])
+  useEffect(() => {
+    imageUrl();
+  }, [selectedFileId]);
 
   function handlePreviousFile() {
     const previousIndex = selectedFileIdIndex !== -1 ? selectedFileIdIndex - 1 : fileIds.length - 1
@@ -60,7 +55,6 @@ function Carousel({ art, open, onClose, fileIds = [], classes, onDelete, picture
     deletePictures(media._id)
     setOpenDelete(false)
   }
-
 
   useEffect(
     () => {
@@ -86,6 +80,13 @@ function Carousel({ art, open, onClose, fileIds = [], classes, onDelete, picture
     [fileIds, setSelectedFileId, setSelectedFileIdIndex, setThumbnails]
   )
 
+  useEffect(() => {
+    if (fileIds.length > 0) {
+      setSelectedFileId(fileIds[0]);
+      setSelectedFileIdIndex(0);
+    }
+  }, [fileIds]);  
+
   return (
     <Dialog open={open} onClose={onClose} PaperProps={{ className: classes.paper }} TransitionComponent={Transition} fullScreen>
       <CardHeader
@@ -103,7 +104,11 @@ function Carousel({ art, open, onClose, fileIds = [], classes, onDelete, picture
       <CardContent className={classes.fileContainer}>
           <Typography className={classes.title}>Picture taken: {new Date(media.date_created).toLocaleDateString()} </Typography>
           <Box>
-            <img alt="Moser" src={url || ''} className={classes.fileDisplay} />
+          {url ? (
+            <img alt="Moser" src={url} className={classes.fileDisplay} />
+          ) : (
+            <Typography className={classes.title}>No image available</Typography>
+          )}
           </Box>
       </CardContent>
       <CardContent className={classes.fileThumbnailsContainer}>{thumbnails}</CardContent>
