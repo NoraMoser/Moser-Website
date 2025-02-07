@@ -1,22 +1,22 @@
 import axios from 'axios'
 
 const local = 'http://localhost:8000'
-const production = 'https://noral-master.onrender.com'
+const production = 'https://noral-master.onrender.com' 
 
 export const apiHero = async () => {
     return axios.get(`${production}/api/hero/list`)
-} 
+}
 
 export const apiUploadFiles = async (req) => {
     return axios.post(`${production}/api/file/upload`, req)
 }
 
 export const apiGetFileImageUrl = async (id) => {
-    return axios.get(`${production}/api/file/${id}`)
+    return axios.get(`${production}/media/${id}`) // Update to /media/:id for image URL
 }
 
 export const apiCreatePictureObject = async (object) => {
-    return axios.post(`${production}/api/picture/create `, object)
+    return axios.post(`${production}/api/picture/create`, object)
 }
 
 export const apiGetAllPictures = async () => {
@@ -24,7 +24,7 @@ export const apiGetAllPictures = async () => {
 }
 
 export const apiCreateVideoObject = async (object) => {
-    return axios.post(`${production}/api/video/create `, object)
+    return axios.post(`${production}/api/video/create`, object)
 }
 
 export const apiGetAllVideos = async () => {

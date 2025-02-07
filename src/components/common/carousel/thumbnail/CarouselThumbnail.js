@@ -1,42 +1,31 @@
-import React, { Fragment, useState, useEffect, useCallback } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { withStyles, Tooltip } from '@material-ui/core'
+import { withStyles } from '@material-ui/core'
 import styles from '../styles'
-import { apiGetFileImageUrl } from '../../../../utils/api'
 
-
-function CarouselThumbnail({ fileId, fileIndex, onClick, classes, fileIdArray }) {
-    const [url, setUrl] = useState()
-    // console.log(fileIdArray)
-
-    const imageUrl = useCallback(
-        () => {
-            apiGetFileImageUrl(fileId).then(({config}) => {
-                setUrl(config.url)
-                return config.url
-            })
-    }, [setUrl, fileId] )
-
+function CarouselThumbnail({ fileId, fileIndex, onClick, classes }) {
+    const [url, setUrl] = useState('');
 
     useEffect(() => {
-    if(!!fileId) {
-      imageUrl()
-    }
-    }, [imageUrl, fileId])
+        if (fileId) {
+            const baseUrl = 'https://noral-master.onrender.com';
+            setUrl(`${baseUrl}/media/${fileId}`);
+        }
+    }, [fileId]);
 
-  return (
-    <Fragment>
-        <div onClick={onClick} className={classes.thumbnailButton} style={{ marginLeft: fileIndex * 158 }} />
-      <img alt="Thumbnail" src={url || ''} className={classes.fileThumbnail} aria-label="CarouselThumbnail" />
-    </Fragment>
-  )
+    return (
+        <Fragment>
+            <div onClick={onClick} className={classes.thumbnailButton} style={{ marginLeft: fileIndex * 158 }} />
+            <img alt="Thumbnail" src={url} className={classes.fileThumbnail} aria-label="CarouselThumbnail" />
+        </Fragment>
+    )
 }
 
 CarouselThumbnail.propTypes = {
-  fileId: PropTypes.string.isRequired,
-  fileIndex: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired,
-  classes: PropTypes.object
+    fileId: PropTypes.string.isRequired,
+    fileIndex: PropTypes.number.isRequired,
+    onClick: PropTypes.func.isRequired,
+    classes: PropTypes.object
 }
 
 export default withStyles(styles, { withTheme: true })(CarouselThumbnail)
