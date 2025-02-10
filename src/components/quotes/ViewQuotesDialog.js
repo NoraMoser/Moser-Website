@@ -12,15 +12,16 @@ const useStyles = makeStyles(theme => ({
 
 function ViewQuotesDialog({open, close, data, onClickRandomQuote}) {
     const classes = useStyles()
+    console.log(data)
     
         return (
         <Dialog open={open} onClose={close}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <DialogContent>
-                        <Typography variant="h5">By: {data.author}</Typography>
-                        <Typography>Age: {data.age}</Typography>
-                        <Typography className={classes.quoteContainer}>{data.quote}</Typography>
+                        <Typography variant="h5">By: {data ? data.author : ''}</Typography>
+                        <Typography>Age:{data ? data.age : ''}</Typography>
+                        <Typography className={classes.quoteContainer}>{data ? data.quote : ''}</Typography>
                     </DialogContent>
                 </Grid>
             </Grid>
